@@ -110,43 +110,48 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: backgroundColor,
-      appBar: AppBar(
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
         backgroundColor: backgroundColor,
-        title: Text(
-          '平成プロフィール',
-          textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.white, fontFamily: 'Madou'),
+        appBar: AppBar(
+          backgroundColor: backgroundColor,
+          title: Text(
+            '平成プロフィール',
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.white, fontFamily: 'Madou'),
+          ),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
         ),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              ProfileQuestion(question: 'HN', backgroundColor: backgroundColor),
-              ProfileQuestion(question: '学年', backgroundColor: backgroundColor),
-              ProfileQuestion(question: '兎に角主張したいこと', backgroundColor: backgroundColor),
-              ProfileQuestion(question: 'ここだけの話', backgroundColor: backgroundColor),
-              ProfileQuestion(question: 'ゲストブック', backgroundColor: backgroundColor),
-              SizedBox(height: 10), // 追加: ボタンを上に10ピクセルずらすための余白
-              ElevatedButton(
-                onPressed: () {
-                  showPopup(context);
-                },
-                child: Text(
-                  '入力完了',
-                  style: TextStyle(fontFamily: 'Madou'),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                ProfileQuestion(question: 'HN', backgroundColor: backgroundColor),
+                ProfileQuestion(question: '学年', backgroundColor: backgroundColor),
+                ProfileQuestion(question: '兎に角主張したいこと', backgroundColor: backgroundColor),
+                ProfileQuestion(question: 'ここだけの話', backgroundColor: backgroundColor),
+                ProfileQuestion(question: 'ゲストブック', backgroundColor: backgroundColor),
+                SizedBox(height: 10), // 追加: ボタンを上に10ピクセルずらすための余白
+                ElevatedButton(
+                  onPressed: () {
+                    showPopup(context);
+                  },
+                  child: Text(
+                    '入力完了',
+                    style: TextStyle(fontFamily: 'Madou'),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

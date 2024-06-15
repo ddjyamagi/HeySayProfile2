@@ -21,10 +21,10 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
-  assets:
-    - assets/fonts/madoufmg.ttf
+  # assets:
+  #   - assets/fonts/madoufmg.ttf
 
   fonts:
     - family: Madou
       fonts:
-        - asset: assets/fonts/madoufmg.ttf
+        - asset: assets/madoufmg.ttf
