@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_project/profile_question.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,12 +8,58 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '平成プロフ',
+      title: 'Kent\'s Brain',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         fontFamily: 'Madou',
       ),
-      home: MyHomePage(),
+      home: HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Kent\'s Brain'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              '🧠',
+              style: TextStyle(fontSize: 100),
+            ),
+            SizedBox(height: 20),
+            GridView.count(
+              shrinkWrap: true,
+              crossAxisCount: 3,
+              childAspectRatio: 2,
+              children: List.generate(9, (index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (index == 0) { // 一番左上のボタン
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => MyHomePage()),
+                        );
+                      } else {
+                        // 他のボタンの機能をここに追加
+                      }
+                    },
+                    child: Text('Button ${index + 1}'),
+                  ),
+                );
+              }),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -24,12 +69,22 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
+
 class _MyHomePageState extends State<MyHomePage> {
   Color backgroundColor = Color.fromARGB(255, 255, 30, 184);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Text('平成プロフィール'),
+      ),
       backgroundColor: backgroundColor,
       body: Center(
         child: SingleChildScrollView(
@@ -141,7 +196,7 @@ class ProfilePage extends StatelessWidget {
                 ProfileQuestion(question: '兎に角主張したいこと', backgroundColor: backgroundColor),
                 ProfileQuestion(question: 'ここだけの話', backgroundColor: backgroundColor),
                 ProfileQuestion(question: 'ゲストブック', backgroundColor: backgroundColor),
-                SizedBox(height: 10), // 追加: ボタンを上に10ピクセルずらすための余白
+                SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () {
                     showPopup(context);
@@ -171,7 +226,7 @@ class ProfilePage extends StatelessWidget {
               style: TextStyle(color: Colors.black, fontFamily: 'Madou'),
               children: [
                 TextSpan(
-                  text: ' PortFolderとは弊社が作っている”新感覚SNS”サービスのことです。\n\n',
+                  text: ' PortFolderとは弊社が作っている"新感覚SNS"サービスのことです。\n\n',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Madou',
@@ -198,6 +253,45 @@ class ProfilePage extends StatelessWidget {
   }
 }
 
+class ProfileQuestion extends StatelessWidget {
+  final String question;
+  final Color backgroundColor;
+
+  ProfileQuestion({required this.question, required this.backgroundColor});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          width: double.infinity,
+          color: const Color.fromARGB(255, 0, 0, 0).withOpacity(0.3),
+          padding: EdgeInsets.all(16),
+          margin: EdgeInsets.only(bottom: 16),
+          child: Text(
+            question,
+            style: TextStyle(color: Colors.white, fontSize: 18, fontFamily: 'Madou'),
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          decoration: BoxDecoration(
+            color: backgroundColor,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: TextField(
+            style: TextStyle(color: Colors.white, fontFamily: 'Madou'),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+            ),
+          ),
+        ),
+        SizedBox(height: 20),
+      ],
+    );
+  }
+}
 
 class ColorButton extends StatelessWidget {
   final Color color;
@@ -207,17 +301,16 @@ class ColorButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 10),
-        width: 50,
-        height: 50,
-        decoration: BoxDecoration(
-          color: color,
-          shape: BoxShape.circle,
-          border: Border.all(color: Colors.white, width: 2),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: color, 
+          shape: CircleBorder(),
+          padding: EdgeInsets.all(24),
         ),
+        onPressed: onPressed,
+        child: Container(),
       ),
     );
   }
