@@ -9,7 +9,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Color backgroundColor = const Color.fromARGB(255, 255, 30, 184);
+  Color themecolor = const Color.fromARGB(255, 255, 30, 184);
   // 背景色の初期値
   @override
   Widget build(BuildContext context) {
@@ -21,9 +21,14 @@ class _MyHomePageState extends State<MyHomePage> {
             Navigator.pop(context); // 前の画面に戻る
           },
         ),
-        title: const Text('平成プロフィール'), // アプリバーのタイトル
+        title: const Text(
+          '平成プロフィール',
+          style: TextStyle(color: Colors.white),
+        ), // アプリバーのタイトル
+
+        backgroundColor: themecolor,
       ),
-      backgroundColor: backgroundColor, // 背景色
+      backgroundColor: themecolor, // 背景色
       body: Center(
         child: SingleChildScrollView(
           child: Column(
@@ -47,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     context,
                     MaterialPageRoute<void>(
                       builder: (context) {
-                        return ProfilePage(backgroundColor: backgroundColor);
+                        return ProfilePage(backgroundColor: themecolor);
                       }, // ProfilePageへ遷移
                     ),
                   );
@@ -65,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.blue, // ボタンの色
                     onPressed: () {
                       setState(() {
-                        backgroundColor = Colors.blue; // 背景色を変更
+                        themecolor = Colors.blue; // 背景色を変更
                       });
                     },
                   ),
@@ -73,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.green, // ボタンの色
                     onPressed: () {
                       setState(() {
-                        backgroundColor = Colors.green; // 背景色を変更
+                        themecolor = Colors.green; // 背景色を変更
                       });
                     },
                   ),
@@ -81,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.purple, // ボタンの色
                     onPressed: () {
                       setState(() {
-                        backgroundColor = Colors.purple; // 背景色を変更
+                        themecolor = Colors.purple; // 背景色を変更
                       });
                     },
                   ),
@@ -89,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: const Color.fromARGB(255, 255, 30, 184), // ボタンの色
                     onPressed: () {
                       setState(() {
-                        backgroundColor = const Color.fromARGB(
+                        themecolor = const Color.fromARGB(
                           255,
                           255,
                           30,
